@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/UserContext';
 import './Login.css'
 const Login = () => {
     const [error, setError] = useState(null);
     
     const { userLogin } = useContext(AuthContext);
-
+    const navigate = useNavigate();
     
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -18,12 +18,13 @@ const Login = () => {
             const user = result.user;
             console.log(user);
             form.reset();
-            setError(null)
+            setError(null);
+            navigate('/')
         }).catch(err => {
             console.error('error', err);
             setError('Wrong password or email.')
         })
-        
+
     }
     return (
       <div className="form-container">
