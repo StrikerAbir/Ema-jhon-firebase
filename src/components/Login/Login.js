@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/UserContext';
 import './Login.css'
 const Login = () => {
@@ -7,7 +7,9 @@ const Login = () => {
     
     const { userLogin } = useContext(AuthContext);
     const navigate = useNavigate();
-    
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/';
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -19,7 +21,7 @@ const Login = () => {
             console.log(user);
             form.reset();
             setError(null);
-            navigate('/')
+            navigate(from, {replace: true});
         }).catch(err => {
             console.error('error', err);
             setError('Wrong password or email.')
