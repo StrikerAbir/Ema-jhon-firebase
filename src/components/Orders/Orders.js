@@ -18,19 +18,29 @@ const Orders = () => {
        deleteShoppingCart();
      };
     return (
-        <div className="shop-container">
-            <div className="orders-container">
-                {
-                    cart.map(product=><ReviewItem key={product.id} product={product} handleRemoveItem={handleRemoveItem}></ReviewItem>)
-                }
-                {
-                    cart.length===0 && <h2>No item for Review <Link to='/shop'>Shop here</Link></h2> 
-                }
-            </div>
-            <div className='cart-container'>
-                <Cart clearCart={clearCart} cart={cart}></Cart>
-            </div>
+      <div className="shop-container">
+        <div className="orders-container">
+          {cart.map((product) => (
+            <ReviewItem
+              key={product.id}
+              product={product}
+              handleRemoveItem={handleRemoveItem}
+            ></ReviewItem>
+          ))}
+          {cart.length === 0 && (
+            <h2>
+              No item for Review <Link to="/shop">Shop here</Link>
+            </h2>
+          )}
         </div>
+        <div className="cart-container">
+          <Cart clearCart={clearCart} cart={cart}>
+            <Link to="/shipping">
+              <button>Proceed Shipping</button>
+            </Link>
+          </Cart>
+        </div>
+      </div>
     );
 };
 

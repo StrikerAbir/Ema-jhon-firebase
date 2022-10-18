@@ -5,10 +5,12 @@ import About from './components/About/About';
 import Inventory from './components/Inventory/Inventory';
 import Login from './components/Login/Login';
 import Orders from './components/Orders/Orders';
+import Shipping from './components/Shipping/Shipping';
 import Shop from './components/Shop/Shop';
 import SignUp from './components/SignUp/SignUp';
 import Main from './Layout/Main/Main';
 import { productsAndCartLoader } from './Loaders/productsAndCartLoader';
+import PrivateRoute from './Routes/PrivateRoute';
 
 
 function App() {
@@ -44,17 +46,25 @@ function App() {
           element: <Inventory></Inventory>,
         },
         {
+          path: "/shipping",
+          element: (
+            <PrivateRoute>
+              <Shipping></Shipping>
+            </PrivateRoute>
+          ),
+        },
+        {
           path: "about",
           element: <About></About>,
         },
         {
-          path: '/login',
-          element: <Login></Login>
+          path: "/login",
+          element: <Login></Login>,
         },
         {
-          path: '/signup',
-          element: <SignUp></SignUp>
-        }
+          path: "/signup",
+          element: <SignUp></SignUp>,
+        },
       ],
     },
   ]);
